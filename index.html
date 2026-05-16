@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 min-h-screen flex items-center justify-center font-mono text-neutral-200 p-4">
+
+    <div class="w-full max-w-md">
+        <h1 class="text-neutral-500 text-center text-xl mb-6 font-bold tracking-wide">Password Generator</h1>
+
+        <div class="bg-neutral-900 p-4 md:p-6 mb-6 flex justify-between items-center shadow-lg">
+            <span id="password-display" class="text-2xl md:text-3xl text-neutral-500 opacity-50 select-none">P4$5W0rD!</span>
+            <button id="copy-btn" class="text-emerald-400 hover:text-white transition-colors cursor-pointer group flex items-center relative">
+                <span id="copy-msg" class="text-emerald-400 text-sm absolute right-8 opacity-0 transition-opacity uppercase font-bold">Copied</span>
+                <svg width="21" height="24" xmlns="http://www.w3.org/2000/svg" class="fill-current group-hover:fill-white">
+                    <path d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H15v4.5h4.5v10.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="bg-neutral-900 p-4 md:p-8 shadow-lg">
+            
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-base md:text-lg">Character Length</span>
+                <span id="length-display" class="text-3xl font-bold text-emerald-400">10</span>
+            </div>
+            
+            <div class="mb-8">
+                <input type="range" id="length-slider" min="8" max="20" value="10" 
+                    class="w-full h-2 appearance-none bg-black rounded-lg cursor-pointer accent-emerald-400 
+                    [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 
+                    [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-neutral-200 
+                    hover:[&::-webkit-slider-thumb]:bg-neutral-950 hover:[&::-webkit-slider-thumb]:border-2 
+                    hover:[&::-webkit-slider-thumb]:border-emerald-400 transition-all">
+            </div>
+
+            <div class="flex flex-col gap-4 mb-8">
+                <label class="flex items-center cursor-pointer group select-none">
+                    <input type="checkbox" id="uppercase" class="w-5 h-5 accent-emerald-400 mr-4 cursor-pointer" checked>
+                    <span class="text-base group-hover:text-white transition-colors">Include Uppercase Letters</span>
+                </label>
+                <label class="flex items-center cursor-pointer group select-none">
+                    <input type="checkbox" id="lowercase" class="w-5 h-5 accent-emerald-400 mr-4 cursor-pointer" checked>
+                    <span class="text-base group-hover:text-white transition-colors">Include Lowercase Letters</span>
+                </label>
+                <label class="flex items-center cursor-pointer group select-none">
+                    <input type="checkbox" id="numbers" class="w-5 h-5 accent-emerald-400 mr-4 cursor-pointer" checked>
+                    <span class="text-base group-hover:text-white transition-colors">Include Numbers</span>
+                </label>
+                <label class="flex items-center cursor-pointer group select-none">
+                    <input type="checkbox" id="symbols" class="w-5 h-5 accent-emerald-400 mr-4 cursor-pointer">
+                    <span class="text-base group-hover:text-white transition-colors">Include Symbols</span>
+                </label>
+            </div>
+
+            <div class="bg-black flex justify-between items-center p-4 mb-8">
+                <span class="text-neutral-500 uppercase text-sm md:text-base font-bold">Strength</span>
+                <div class="flex items-center gap-4">
+                    <span id="strength-text" class="text-lg md:text-xl font-bold uppercase hidden md:block">Medium</span>
+                    <div class="flex gap-2">
+                        <div class="w-2.5 h-7 border-2 border-neutral-200 strength-bar"></div>
+                        <div class="w-2.5 h-7 border-2 border-neutral-200 strength-bar"></div>
+                        <div class="w-2.5 h-7 border-2 border-neutral-200 strength-bar"></div>
+                        <div class="w-2.5 h-7 border-2 border-neutral-200 strength-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="generate-btn" class="w-full bg-emerald-400 text-neutral-950 uppercase font-bold text-lg p-4 border-2 border-emerald-400 hover:bg-transparent hover:text-emerald-400 transition-all flex justify-center items-center gap-4 group cursor-pointer">
+                Generate
+                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" class="fill-current group-hover:fill-emerald-400 transition-colors">
+                    <path d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="./js/app.js" defer></script>
+</body>
+</html>
